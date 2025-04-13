@@ -9,16 +9,16 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('docker_exp') { // Correct directory name from your filesystem
-                    sh 'ls -l' // Debugging: List files to check if Dockerfile exists
-                    sh 'docker build -t my-docker-webapp .' // Build Docker Image
+                    bat 'dir' // Windows equivalent of ls -l
+                    bat 'docker build -t my-docker-webapp .' // Build Docker Image
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker stop my-docker-webapp || true' // Stop existing container if it exists
-                sh 'docker rm my-docker-webapp || true' // Remove existing container if it exists
-                sh 'docker run -d -p 8081:80 --name my-docker-webapp my-docker-webapp'
+                bat 'docker stop my-docker-webapp || exit 0' // Stop existing container if it exists
+                bat 'docker rm my-docker-webapp || exit 0' // Remove existing container if it exists
+                bat 'docker run -d -p 8081:80 --name my-docker-webapp my-docker-webapp'
             }
         }
     }
