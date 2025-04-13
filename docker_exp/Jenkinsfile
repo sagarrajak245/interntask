@@ -18,7 +18,7 @@ pipeline {
             steps {
                 bat 'docker stop my-docker-webapp || exit 0' // Stop existing container if it exists
                 bat 'docker rm my-docker-webapp || exit 0' // Remove existing container if it exists
-                bat 'docker run -d -p 8081:80 --name my-docker-webapp my-docker-webapp'
+                bat 'docker run -d -p 8082:80 --name my-docker-webapp my-docker-webapp'
             }
         }
     }
